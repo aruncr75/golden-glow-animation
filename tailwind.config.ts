@@ -26,6 +26,13 @@ export default {
           light: "#FFD700",
           medium: "#DAA520",
           dark: "#B8860B",
+          primary: "#B45309",
+          secondary: "#F59E0B",
+          accent: "#FCD34D",
+        },
+        bmw: {
+          primary: "#1C69D4",
+          accent: "#0066B1",
         },
       },
       keyframes: {
