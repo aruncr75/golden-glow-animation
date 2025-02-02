@@ -92,8 +92,9 @@
 
 @layer utilities {
   .gold-particle {
-    @apply absolute rounded-full bg-gold-light opacity-20;
+    @apply absolute rounded-full bg-gold-light opacity-30;
     animation: float 6s ease-in-out infinite;
+    filter: blur(1px) brightness(1.2);
   }
 
   .gold-particle:nth-child(2n) {

@@ -53,7 +53,7 @@ const Index = () => {
         className="absolute inset-0 bg-gold-gradient bg-400% animate-gradient-shift"
         style={{ backgroundSize: "400% 400%" }}
       >
-        {/* Particles */}
+        {/* Brighter Particles */}
         {particles.map((particle) => (
           <div
             key={particle.id}
@@ -63,6 +63,8 @@ const Index = () => {
               height: `${particle.size}px`,
               left: `${particle.left}%`,
               top: `${particle.top}%`,
+              opacity: Math.random() * 0.5 + 0.3, // Increased base opacity
+              boxShadow: '0 0 10px rgba(255, 215, 0, 0.5)' // Added glow effect
             }}
           />
         ))}
@@ -73,19 +75,21 @@ const Index = () => {
       {/* Content container */}
       <div className="relative z-10 container mx-auto px-4">
         <div className="flex items-center justify-center min-h-[50vh]">
-          {/* Floating background icons */}
+          {/* Brighter Floating icons */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {[...Array(20)].map((_, i) => (
               <div
                 key={i}
-                className={`absolute opacity-20 text-yellow-500
+                className={`absolute text-yellow-400
                   ${isRevealed ? 'animate-[float_3s_ease-in-out_infinite]' : 'opacity-0'}
                 `}
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
                   animation: `float ${2 + Math.random() * 2}s ease-in-out infinite`,
-                  animationDelay: `${Math.random() * 2}s`
+                  animationDelay: `${Math.random() * 2}s`,
+                  opacity: 0.4, // Increased from 0.2
+                  filter: 'drop-shadow(0 0 5px rgba(255, 215, 0, 0.5))' // Added glow effect
                 }}
               >
                 {i % 3 === 0 ? <Stars className="w-6 h-6" /> : 
