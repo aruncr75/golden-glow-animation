@@ -5,7 +5,7 @@ const Index = () => {
 
   useEffect(() => {
     const generateParticles = () => {
-      const newParticles = Array.from({ length: 20 }, (_, i) => ({
+      const newParticles = Array.from({ length: 50 }, (_, i) => ({
         id: i,
         size: Math.random() * 8 + 4,
         left: Math.random() * 100,
