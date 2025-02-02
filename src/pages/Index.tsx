@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Trophy } from "lucide-react";
+import { Trophy, Stars, PartyPopper, Sparkles } from "lucide-react";
 
 const Index = () => {
   const [particles, setParticles] = useState<Array<{ id: number; size: number; left: number; top: number }>>([]);
@@ -73,6 +73,28 @@ const Index = () => {
       {/* Content container */}
       <div className="relative z-10 container mx-auto px-4">
         <div className="flex items-center justify-center min-h-[50vh]">
+          {/* Floating background icons */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {[...Array(20)].map((_, i) => (
+              <div
+                key={i}
+                className={`absolute opacity-20 text-yellow-500
+                  ${isRevealed ? 'animate-[float_3s_ease-in-out_infinite]' : 'opacity-0'}
+                `}
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animation: `float ${2 + Math.random() * 2}s ease-in-out infinite`,
+                  animationDelay: `${Math.random() * 2}s`
+                }}
+              >
+                {i % 3 === 0 ? <Stars className="w-6 h-6" /> : 
+                 i % 3 === 1 ? <PartyPopper className="w-6 h-6" /> :
+                 <Sparkles className="w-6 h-6" />}
+              </div>
+            ))}
+          </div>
+
           <button
             onClick={handleReveal}
             disabled={isRevealed || isAnimating}
