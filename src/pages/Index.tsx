@@ -112,7 +112,7 @@ const Index = () => {
     <div className="relative min-h-screen overflow-hidden flex items-center justify-center bg-black/90">
       {/* Animated gradient background */}
       <div
-        className="absolute inset-0 bg-gold-gradient bg-400% animate-gradient-shift opacity-75"
+        className="absolute inset-0 bg-gradient-to-br from-gold-primary via-yellow-500 to-gold-secondary animate-gradient-shift opacity-75"
         style={{ backgroundSize: "400% 400%" }}
       >
         {/* Brighter Particles */}
