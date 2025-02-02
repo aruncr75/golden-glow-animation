@@ -229,7 +229,7 @@ const Index = () => {
                 className={`relative w-full max-w-4xl rounded-2xl p-8 mx-auto
                   bg-gradient-to-br from-gold-primary via-yellow-500 to-gold-secondary
                   text-white shadow-xl
-                  transform perspective-1000 hover:scale-105 transition-all duration-500
+                  transform hover:scale-105 transition-all duration-500
                   before:absolute before:inset-0 before:bg-white/10 before:rounded-2xl 
                   before:backdrop-blur-sm before:opacity-20`}
                 initial={{ 
@@ -243,6 +243,10 @@ const Index = () => {
                   opacity: 1,
                   y: 0,
                   rotateX: 0
+                }}
+                whileHover={{ 
+                  scale: 1.05,
+                  transition: { duration: 0.3 }
                 }}
                 transition={{
                   type: "spring",
