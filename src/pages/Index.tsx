@@ -225,13 +225,31 @@ const Index = () => {
             </div>
           ) : (
             <div className="p-4 w-full">
-              <div 
+              <motion.div 
                 className={`relative w-full max-w-4xl rounded-2xl p-8 mx-auto
                   bg-gradient-to-br from-gold-primary via-yellow-500 to-gold-secondary
                   text-white shadow-xl
                   transform perspective-1000 hover:scale-105 transition-all duration-500
                   before:absolute before:inset-0 before:bg-white/10 before:rounded-2xl 
                   before:backdrop-blur-sm before:opacity-20`}
+                initial={{ 
+                  scale: 0,
+                  opacity: 0,
+                  y: -50,
+                  rotateX: -45
+                }}
+                animate={{ 
+                  scale: 1,
+                  opacity: 1,
+                  y: 0,
+                  rotateX: 0
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20,
+                  duration: 0.8
+                }}
               >
                 <Confetti
                   width={width}
@@ -243,9 +261,10 @@ const Index = () => {
                 
                 {/* Winner content */}
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
                   className="relative z-10 text-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
                 >
                   {/* Trophy Icon */}
                   <motion.div className="flex justify-center">
@@ -292,7 +311,7 @@ const Index = () => {
                     </button>
                   </motion.div>
                 </motion.div>
-              </div>
+              </motion.div>
             </div>
           )}
         </div>
