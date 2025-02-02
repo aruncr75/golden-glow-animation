@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Confetti from "react-confetti";
-import { useWindowSize } from "react-use";
 import { motion, AnimatePresence } from "framer-motion";
 import { Trophy, Car } from "lucide-react";
+import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 
 interface WinnerDisplayProps {
   theme: "bmw" | "gold";
@@ -10,7 +10,7 @@ interface WinnerDisplayProps {
 }
 
 const WinnerDisplay: React.FC<WinnerDisplayProps> = ({ theme, winnerName }) => {
-  const { width, height } = useWindowSize();
+  const { width, height } = useWindowDimensions();
 
   const getThemeStyles = () => {
     if (theme === "bmw") {

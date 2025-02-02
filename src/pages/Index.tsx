@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Trophy, Stars, PartyPopper, Sparkles, Car } from "lucide-react";
+import { Trophy, Stars, PartyPopper, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import Confetti from "react-confetti";
-import { useWindowSize } from "react-use";
+import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 
 const Index = () => {
   const [particles, setParticles] = useState<Array<{ id: number; size: number; left: number; top: number }>>([]);
@@ -13,7 +13,7 @@ const Index = () => {
   const [showWinnerCard, setShowWinnerCard] = useState(false);
   const [count, setCount] = useState(5); // Changed from 10 to 5
   const [key, setKey] = useState(0);
-  const { width, height } = useWindowSize();
+  const { width, height } = useWindowDimensions();
 
   useEffect(() => {
     const generateParticles = () => {
