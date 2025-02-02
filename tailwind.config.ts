@@ -19,6 +19,7 @@ export default {
     },
     extend: {
       colors: {
+        border: "hsl(var(--border))",
         gold: {
           light: "#FFD700",
           medium: "#DAA520",
