@@ -49,12 +49,7 @@ const Index = () => {
       {/* Content container */}
       <div className="relative z-10 container mx-auto px-4 py-8">
         <div className="text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
-            Welcome to Your Golden App
-          </h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto drop-shadow-md">
-            Start building your award-winning project here!
-          </p>
+          {/* Text content removed */}
         </div>
       </div>
     </div>
