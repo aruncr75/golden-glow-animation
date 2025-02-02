@@ -90,6 +90,25 @@
   }
 }
 
+@layer utilities {
+  .gold-particle {
+    @apply absolute rounded-full bg-gold-light opacity-20;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .gold-particle:nth-child(2n) {
+    animation-delay: 2s;
+  }
+
+  .gold-particle:nth-child(3n) {
+    animation-delay: 4s;
+  }
+
+  .shimmer-effect {
+    @apply absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/10 to-transparent;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
