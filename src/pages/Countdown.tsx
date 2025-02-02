@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const Countdown = () => {
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(5); // Changed from 10 to 5
   const [key, setKey] = useState(0);
 
   useEffect(() => {
