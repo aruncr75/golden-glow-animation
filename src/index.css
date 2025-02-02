@@ -115,8 +115,10 @@
   }
 
   .ring {
-    @apply absolute rounded-full border-2 border-yellow-500/30;
+    @apply absolute rounded-full border-2;
     animation: ringPulse 4s ease-out infinite;
+    border-width: 3px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
   }
 
   .number-animation {

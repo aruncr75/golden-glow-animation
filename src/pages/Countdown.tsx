@@ -42,7 +42,9 @@ const Countdown = () => {
         height: `${300 + i * 60}px`,
         animationDuration: `${4 + i}s`,
         animationDirection: i % 2 === 0 ? 'normal' : 'reverse',
-        opacity: 0.2 - i * 0.05,
+        opacity: 0.3 - i * 0.05,
+        borderColor: i % 2 === 0 ? '#FFD700' : '#FFA500',
+        boxShadow: `0 0 20px ${i % 2 === 0 ? 'rgba(255, 215, 0, 0.3)' : 'rgba(255, 165, 0, 0.3)'}`,
       }}
     />
   ));
