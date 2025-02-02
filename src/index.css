@@ -108,6 +108,57 @@
   .shimmer-effect {
     @apply absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/10 to-transparent;
   }
+
+  .particle {
+    @apply absolute w-2 h-2 bg-yellow-500 rounded-full;
+    animation: particleAnimation 2s ease-out forwards;
+  }
+
+  .ring {
+    @apply absolute rounded-full border-2 border-yellow-500/30;
+    animation: ringPulse 4s ease-out infinite;
+  }
+
+  .number-animation {
+    animation: numberScale 0.5s ease-out;
+  }
+}
+
+@keyframes particleAnimation {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes ringPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.5;
+  }
+}
+
+@keyframes numberScale {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @layer base {

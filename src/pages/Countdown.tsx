@@ -1,0 +1,91 @@
+import { useEffect, useState } from 'react';
+
+const Countdown = () => {
+  const [count, setCount] = useState(10);
+  const [key, setKey] = useState(0);
+
+  useEffect(() => {
+    if (count >= 0) {
+      const timer = setTimeout(() => {
+        setCount(count - 1);
+        setKey(prev => prev + 1);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [count]);
+
+  // Generate particles
+  const particles = Array.from({ length: 20 }).map((_, i) => {
+    const angle = (i / 20) * Math.PI * 2;
+    const tx = Math.cos(angle) * 100;
+    const ty = Math.sin(angle) * 100;
+    return (
+      <div
+        key={i}
+        className="particle"
+        style={{
+          '--tx': `${tx}px`,
+          '--ty': `${ty}px`,
+          animationDelay: `${i * 0.1}s`,
+        } as React.CSSProperties}
+      />
+    );
+  });
+
+  // Generate rings
+  const rings = Array.from({ length: 3 }).map((_, i) => (
+    <div
+      key={i}
+      className="ring"
+      style={{
+        width: `${300 + i * 60}px`,
+        height: `${300 + i * 60}px`,
+        animationDuration: `${4 + i}s`,
+        animationDirection: i % 2 === 0 ? 'normal' : 'reverse',
+        opacity: 0.2 - i * 0.05,
+      }}
+    />
+  ));
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-black overflow-hidden">
+      <div className="relative">
+        {/* Background effects */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/30 via-orange-500/20 to-yellow-500/30 animate-pulse" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-500/40 via-orange-500/20 to-transparent" />
+        </div>
+
+        {/* Decorative rings */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          {rings}
+        </div>
+
+        {/* Particles */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          {particles}
+        </div>
+
+        {/* Number display */}
+        <div 
+          key={key}
+          className="text-[300px] font-bold leading-none number-animation relative z-10"
+          style={{
+            background: 'linear-gradient(135deg, #ffd700, #ffa500, #ff8c00)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            filter: 'drop-shadow(0 0 30px rgba(255, 215, 0, 0.5))',
+            textShadow: `
+              2px 2px 4px rgba(0, 0, 0, 0.3),
+              -2px -2px 4px rgba(255, 255, 255, 0.3),
+              0 0 20px rgba(255, 215, 0, 0.2)
+            `
+          }}>
+          {count >= 0 ? count : ''}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Countdown;
