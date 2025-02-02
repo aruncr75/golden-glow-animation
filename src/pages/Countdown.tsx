@@ -73,15 +73,14 @@ const Countdown = () => {
           key={key}
           className="text-[300px] font-bold leading-none number-animation relative z-10"
           style={{
-            background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8))',
+            background: 'linear-gradient(135deg, #ffd700, #ffa500, #ff8c00)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            filter: 'drop-shadow(0 0 30px rgba(255, 215, 0, 0.7))',
+            filter: 'drop-shadow(0 0 30px rgba(255, 215, 0, 0.5))',
             textShadow: `
-              2px 2px 4px #ffd700,
-              -2px -2px 4px #ffa500,
-              0 0 20px #ff8c00,
-              0 0 40px rgba(255, 215, 0, 0.3)
+              2px 2px 4px rgba(0, 0, 0, 0.3),
+              -2px -2px 4px rgba(255, 255, 255, 0.3),
+              0 0 20px rgba(255, 215, 0, 0.2)
             `
           }}>
           {count >= 0 ? count : ''}
