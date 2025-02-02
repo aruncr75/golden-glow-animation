@@ -11,7 +11,7 @@ const Index = () => {
   const [drumrollCount, setDrumrollCount] = useState(0);
   const [showCountdown, setShowCountdown] = useState(false);
   const [showWinnerCard, setShowWinnerCard] = useState(false);
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(5);
   const [key, setKey] = useState(0);
   const { width, height } = useWindowSize();
 
