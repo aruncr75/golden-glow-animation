@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Trophy, Stars, PartyPopper, Sparkles } from "lucide-react";
+import { Trophy, Stars, PartyPopper, Sparkles, Car } from "lucide-react";
 import { motion } from "framer-motion";
 import Confetti from "react-confetti";
-import { useWindowDimensions } from "@/hooks/useWindowDimensions";
+import { useWindowSize } from "react-use";
 
 const Index = () => {
   const [particles, setParticles] = useState<Array<{ id: number; size: number; left: number; top: number }>>([]);
@@ -11,9 +11,9 @@ const Index = () => {
   const [drumrollCount, setDrumrollCount] = useState(0);
   const [showCountdown, setShowCountdown] = useState(false);
   const [showWinnerCard, setShowWinnerCard] = useState(false);
-  const [count, setCount] = useState(5); // Changed from 10 to 5
+  const [count, setCount] = useState(10);
   const [key, setKey] = useState(0);
-  const { width, height } = useWindowDimensions();
+  const { width, height } = useWindowSize();
 
   useEffect(() => {
     const generateParticles = () => {
@@ -229,7 +229,7 @@ const Index = () => {
                 className={`relative w-full max-w-4xl rounded-2xl p-8 mx-auto
                   bg-gradient-to-br from-gold-primary via-yellow-500 to-gold-secondary
                   text-white shadow-xl
-                  transform hover:scale-105 transition-all duration-500
+                  transform perspective-1000 hover:scale-105 transition-all duration-500
                   before:absolute before:inset-0 before:bg-white/10 before:rounded-2xl 
                   before:backdrop-blur-sm before:opacity-20`}
                 initial={{ 
@@ -243,10 +243,6 @@ const Index = () => {
                   opacity: 1,
                   y: 0,
                   rotateX: 0
-                }}
-                whileHover={{ 
-                  scale: 1.05,
-                  transition: { duration: 0.3 }
                 }}
                 transition={{
                   type: "spring",
