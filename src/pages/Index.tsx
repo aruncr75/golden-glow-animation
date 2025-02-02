@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { Trophy, Stars, PartyPopper, Sparkles } from "lucide-react";
+import { Trophy, Stars, PartyPopper, Sparkles, Car } from "lucide-react";
+import { motion } from "framer-motion";
+import Confetti from "react-confetti";
+import { useWindowSize } from "react-use";
 
 const Index = () => {
   const [particles, setParticles] = useState<Array<{ id: number; size: number; left: number; top: number }>>([]);
@@ -7,8 +10,10 @@ const Index = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [drumrollCount, setDrumrollCount] = useState(0);
   const [showCountdown, setShowCountdown] = useState(false);
+  const [showWinnerCard, setShowWinnerCard] = useState(false);
   const [count, setCount] = useState(10);
   const [key, setKey] = useState(0);
+  const { width, height } = useWindowSize();
 
   useEffect(() => {
     const generateParticles = () => {
@@ -39,18 +44,19 @@ const Index = () => {
     return () => clearInterval(interval);
   }, [isAnimating]);
 
-  // Add countdown effect
+  // Update countdown effect
   useEffect(() => {
     if (showCountdown && count >= 0) {
       const timer = setTimeout(() => {
-        setCount(count - 1);
-        setKey(prev => prev + 1);
+        if (count === 0) {
+          setShowWinnerCard(true);
+          setShowCountdown(false);
+        } else {
+          setCount(count - 1);
+          setKey(prev => prev + 1);
+        }
       }, 1000);
       return () => clearTimeout(timer);
-    } else if (count < 0) {
-      // Hide countdown and show winner
-      setShowCountdown(false);
-      setIsRevealed(true);
     }
   }, [count, showCountdown]);
 
@@ -75,6 +81,30 @@ const Index = () => {
     if (!isRevealed && !isAnimating) {
       setIsAnimating(true);
       setShowCountdown(true);
+    }
+  };
+
+  const letterVariants = {
+    animate: (i: number) => ({
+      scale: [1, 1.2, 1],
+      transition: {
+        duration: 0.8,
+        repeat: Infinity,
+        repeatDelay: 0.1,
+        delay: i * 0.1,
+        ease: "easeInOut"
+      },
+    }),
+  };
+
+  const containerVariants = {
+    animate: {
+      scale: [1, 1.05, 1],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
     }
   };
 
@@ -131,7 +161,7 @@ const Index = () => {
             ))}
           </div>
 
-          {!showCountdown ? (
+          {!showCountdown && !showWinnerCard ? (
             <button
               onClick={handleReveal}
               disabled={isRevealed || isAnimating}
@@ -167,7 +197,7 @@ const Index = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-20 transition-opacity transform skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] duration-1000" />
               <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#FFD700] to-[#FFA500] opacity-0 group-hover:opacity-50 blur-xl transition-opacity duration-500" />
             </button>
-          ) : (
+          ) : showCountdown ? (
             <div className="relative">
               {/* Decorative rings */}
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -191,6 +221,77 @@ const Index = () => {
                   `
                 }}>
                 {count >= 0 ? count : ''}
+              </div>
+            </div>
+          ) : (
+            <div className="p-4 w-full">
+              <div 
+                className={`relative w-full max-w-4xl rounded-2xl p-8 mx-auto
+                  bg-gradient-to-br from-gold-primary via-yellow-500 to-gold-secondary
+                  text-white shadow-xl
+                  transform perspective-1000 hover:scale-105 transition-all duration-500
+                  before:absolute before:inset-0 before:bg-white/10 before:rounded-2xl 
+                  before:backdrop-blur-sm before:opacity-20`}
+              >
+                <Confetti
+                  width={width}
+                  height={height}
+                  colors={['#B45309', '#F59E0B', '#FCD34D', '#FFFFFF']}
+                  recycle={true}
+                  numberOfPieces={200}
+                />
+                
+                {/* Winner content */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="relative z-10 text-center"
+                >
+                  {/* Trophy Icon */}
+                  <motion.div className="flex justify-center">
+                    <Trophy className="w-16 h-16 mb-4 text-gold-accent animate-bounce" />
+                  </motion.div>
+
+                  {/* Congratulations Text */}
+                  <motion.h2 className="text-5xl md:text-7xl font-bold mb-8">
+                    Congratulations!
+                  </motion.h2>
+
+                  {/* Winner Name */}
+                  <motion.div
+                    variants={containerVariants}
+                    animate="animate"
+                    className="text-3xl md:text-5xl font-semibold mb-6 flex justify-center gap-2 text-yellow-200"
+                  >
+                    {"Sarah Johnson".split('').map((letter, index) => (
+                      <motion.span
+                        key={index}
+                        custom={index}
+                        variants={letterVariants}
+                        animate="animate"
+                        style={{ 
+                          display: 'inline-block',
+                          filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.5))'
+                        }}
+                      >
+                        {letter}
+                      </motion.span>
+                    ))}
+                  </motion.div>
+
+                  {/* Prize Text */}
+                  <motion.div className="text-xl md:text-3xl">
+                    You've Won a <span className="font-bold text-yellow-200">Golden Prize!</span>
+                  </motion.div>
+
+                  {/* Claim Button */}
+                  <motion.div className="mt-8">
+                    <button className="px-6 py-3 rounded-full bg-yellow-600 hover:bg-yellow-700 
+                      transition-colors duration-300 transform hover:scale-105 active:scale-95">
+                      Claim Your Prize
+                    </button>
+                  </motion.div>
+                </motion.div>
               </div>
             </div>
           )}
