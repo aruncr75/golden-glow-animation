@@ -252,7 +252,7 @@ const Index = () => {
                 }}
               >
                 <Confetti
-                  width={width}
+                  width={width * 0.5}
                   height={height}
                   colors={['#B45309', '#F59E0B', '#FCD34D', '#FFFFFF']}
                   recycle={true}
