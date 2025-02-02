@@ -50,12 +50,12 @@ const Countdown = () => {
   ));
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-black/95 overflow-hidden">
       <div className="relative">
         {/* Background effects */}
         <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/30 via-orange-500/20 to-yellow-500/30 animate-pulse" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-500/40 via-orange-500/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 via-orange-500/10 to-yellow-500/20 animate-pulse" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-500/30 via-orange-500/10 to-transparent" />
         </div>
 
         {/* Decorative rings */}
@@ -73,14 +73,15 @@ const Countdown = () => {
           key={key}
           className="text-[300px] font-bold leading-none number-animation relative z-10"
           style={{
-            background: 'linear-gradient(135deg, #ffd700, #ffa500, #ff8c00)',
+            background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8))',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            filter: 'drop-shadow(0 0 30px rgba(255, 215, 0, 0.5))',
+            filter: 'drop-shadow(0 0 30px rgba(255, 215, 0, 0.7))',
             textShadow: `
-              2px 2px 4px rgba(0, 0, 0, 0.3),
-              -2px -2px 4px rgba(255, 255, 255, 0.3),
-              0 0 20px rgba(255, 215, 0, 0.2)
+              2px 2px 4px #ffd700,
+              -2px -2px 4px #ffa500,
+              0 0 20px #ff8c00,
+              0 0 40px rgba(255, 215, 0, 0.3)
             `
           }}>
           {count >= 0 ? count : ''}
