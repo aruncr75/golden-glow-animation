@@ -26,11 +26,6 @@ export default {
           light: "#FFD700",
           medium: "#DAA520",
           dark: "#B8860B",
-          podium: "#FFB900",
-        },
-        stage: {
-          dark: "#1a1a1a",
-          darker: "#0a0a0a",
         },
       },
       keyframes: {
@@ -58,26 +53,15 @@ export default {
             transform: "translateX(100%)",
           },
         },
-        "star-spin": {
-          "0%": { transform: "rotate(0deg) scale(1)" },
-          "50%": { transform: "rotate(180deg) scale(1.2)" },
-          "100%": { transform: "rotate(360deg) scale(1)" },
-        },
-        "podium-rise": {
-          "0%": { transform: "translateY(100%)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" },
-        },
       },
       animation: {
         "gradient-shift": "gradient-shift 8s ease infinite",
         float: "float 6s ease-in-out infinite",
         shimmer: "shimmer 2.5s linear infinite",
-        "star-spin": "star-spin 3s ease-in-out infinite",
-        "podium-rise": "podium-rise 1s ease-out forwards",
       },
       backgroundImage: {
-        "gold-gradient": "linear-gradient(-45deg, #FFD700, #DAA520, #B8860B, #DAA520)",
-        "stage-gradient": "radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%)",
+        "gold-gradient":
+          "linear-gradient(-45deg, #FFD700, #DAA520, #B8860B, #DAA520)",
       },
       backgroundSize: {
         "400%": "400% 400%",
