@@ -26,6 +26,7 @@ export default {
           light: "#FFD700",
           medium: "#DAA520",
           dark: "#B8860B",
+          podium: "#FFD700",
         },
       },
       keyframes: {
@@ -53,15 +54,26 @@ export default {
             transform: "translateX(100%)",
           },
         },
+        "podium-rise": {
+          "0%": {
+            transform: "translateY(100%)",
+            opacity: "0",
+          },
+          "100%": {
+            transform: "translateY(0)",
+            opacity: "1",
+          },
+        },
       },
       animation: {
         "gradient-shift": "gradient-shift 8s ease infinite",
         float: "float 6s ease-in-out infinite",
         shimmer: "shimmer 2.5s linear infinite",
+        "podium-rise": "podium-rise 1.5s ease-out forwards",
       },
       backgroundImage: {
-        "gold-gradient":
-          "linear-gradient(-45deg, #FFD700, #DAA520, #B8860B, #DAA520)",
+        "gold-gradient": "linear-gradient(-45deg, #FFD700, #DAA520, #B8860B, #DAA520)",
+        "hexagon-pattern": "url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M30 0l25.98 15v30L30 60 4.02 45V15L30 0z\" fill-opacity=\"0.1\" fill=\"%23DAA520\"/%3E%3C/svg%3E')",
       },
       backgroundSize: {
         "400%": "400% 400%",
