@@ -224,9 +224,9 @@ const Index = () => {
               </div>
             </div>
           ) : (
-            <div className="p-4 w-full">
+            <div className="p-2 sm:p-4 w-full">
               <motion.div 
-                className={`relative w-full max-w-4xl rounded-2xl p-8 mx-auto
+                className={`relative w-full max-w-4xl rounded-2xl p-4 sm:p-8 mx-auto
                   bg-gradient-to-br from-gold-primary via-yellow-500 to-gold-secondary
                   text-white shadow-xl
                   transform perspective-1000 hover:scale-105 transition-all duration-500
@@ -256,23 +256,23 @@ const Index = () => {
                   height={height}
                   colors={['#B45309', '#F59E0B', '#FCD34D', '#FFFFFF']}
                   recycle={true}
-                  numberOfPieces={200}
+                  numberOfPieces={Math.min(200, Math.floor(width / 4))}
                 />
                 
                 {/* Winner content */}
                 <motion.div
-                  className="relative z-10 text-center"
+                  className="relative z-10 text-center px-2"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 }}
                 >
                   {/* Trophy Icon */}
                   <motion.div className="flex justify-center">
-                    <Trophy className="w-16 h-16 mb-4 text-gold-accent animate-bounce" />
+                    <Trophy className="w-12 h-12 sm:w-16 sm:h-16 mb-4 text-gold-accent animate-bounce" />
                   </motion.div>
 
                   {/* Congratulations Text */}
-                  <motion.h2 className="text-5xl md:text-7xl font-bold mb-8">
+                  <motion.h2 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-8">
                     Congratulations!
                   </motion.h2>
 
@@ -280,7 +280,7 @@ const Index = () => {
                   <motion.div
                     variants={containerVariants}
                     animate="animate"
-                    className="text-3xl md:text-5xl font-semibold mb-6 flex justify-center gap-2 text-yellow-200"
+                    className="text-xl sm:text-3xl md:text-5xl font-semibold mb-4 sm:mb-6 flex flex-wrap justify-center gap-1 sm:gap-2 text-yellow-200"
                   >
                     {"Sarah Johnson".split('').map((letter, index) => (
                       <motion.span
@@ -293,20 +293,20 @@ const Index = () => {
                           filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.5))'
                         }}
                       >
-                        {letter}
+                        {letter === ' ' ? '\u00A0' : letter}
                       </motion.span>
                     ))}
                   </motion.div>
 
                   {/* Prize Text */}
-                  <motion.div className="text-xl md:text-3xl">
+                  <motion.div className="text-lg sm:text-xl md:text-3xl">
                     You've Won a <span className="font-bold text-yellow-200">Golden Prize!</span>
                   </motion.div>
 
                   {/* Claim Button */}
-                  <motion.div className="mt-8">
-                    <button className="px-6 py-3 rounded-full bg-yellow-600 hover:bg-yellow-700 
-                      transition-colors duration-300 transform hover:scale-105 active:scale-95">
+                  <motion.div className="mt-6 sm:mt-8">
+                    <button className="px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-yellow-600 hover:bg-yellow-700 
+                      transition-colors duration-300 transform hover:scale-105 active:scale-95 text-sm sm:text-base">
                       Claim Your Prize
                     </button>
                   </motion.div>
