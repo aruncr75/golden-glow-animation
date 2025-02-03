@@ -1,11 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, CSSProperties } from "react";
 import { Trophy, Stars, PartyPopper, Sparkles, Car } from "lucide-react";
 import { motion } from "framer-motion";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
+import { cn } from "@/lib/utils";
+import { 
+  generateParticles, 
+  letterVariants, 
+  containerVariants, 
+  generateRings 
+} from "@/lib/animation-utils";
 
 const Index = () => {
-  const [particles, setParticles] = useState<Array<{ id: number; size: number; left: number; top: number }>>([]);
+  const [particles, setParticles] = useState(generateParticles(50));
   const [isRevealed, setIsRevealed] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [drumrollCount, setDrumrollCount] = useState(0);
@@ -16,22 +23,9 @@ const Index = () => {
   const { width, height } = useWindowSize();
 
   useEffect(() => {
-    const generateParticles = () => {
-      const newParticles = Array.from({ length: 50 }, (_, i) => ({
-        id: i,
-        size: Math.random() * 8 + 4,
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-      }));
-      setParticles(newParticles);
-    };
-
-    generateParticles();
-    window.addEventListener("resize", generateParticles);
-
-    return () => {
-      window.removeEventListener("resize", generateParticles);
-    };
+    const handleResize = () => setParticles(generateParticles(50));
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -60,20 +54,12 @@ const Index = () => {
     }
   }, [count, showCountdown]);
 
-  // Generate rings
-  const rings = Array.from({ length: 3 }).map((_, i) => (
+  // Generate rings using utility
+  const rings = generateRings(3).map((ring, i) => (
     <div
       key={i}
       className="ring"
-      style={{
-        width: `${300 + i * 60}px`,
-        height: `${300 + i * 60}px`,
-        animationDuration: `${4 + i}s`,
-        animationDirection: i % 2 === 0 ? 'normal' : 'reverse',
-        opacity: 0.3 - i * 0.05,
-        borderColor: i % 2 === 0 ? '#FFD700' : '#FFA500',
-        boxShadow: `0 0 20px ${i % 2 === 0 ? 'rgba(255, 215, 0, 0.3)' : 'rgba(255, 165, 0, 0.3)'}`,
-      }}
+      style={ring as CSSProperties}
     />
   ));
 
@@ -81,30 +67,6 @@ const Index = () => {
     if (!isRevealed && !isAnimating) {
       setIsAnimating(true);
       setShowCountdown(true);
-    }
-  };
-
-  const letterVariants = {
-    animate: (i: number) => ({
-      scale: [1, 1.2, 1],
-      transition: {
-        duration: 0.8,
-        repeat: Infinity,
-        repeatDelay: 0.1,
-        delay: i * 0.1,
-        ease: "easeInOut"
-      },
-    }),
-  };
-
-  const containerVariants = {
-    animate: {
-      scale: [1, 1.05, 1],
-      transition: {
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
     }
   };
 
@@ -166,7 +128,7 @@ const Index = () => {
               onClick={handleReveal}
               disabled={isRevealed || isAnimating}
               aria-label="Reveal winner"
-              className={`
+              className={cn(`
                 group relative min-w-[300px] min-h-[70px] px-12 py-5
                 bg-gradient-to-r from-[#FFD700] via-[#FFA500] to-[#FF8C00]
                 rounded-2xl text-white font-bold text-2xl
@@ -177,7 +139,7 @@ const Index = () => {
                 shadow-[0_0_30px_rgba(255,215,0,0.3)]
                 hover:shadow-[0_0_50px_rgba(255,215,0,0.5)]
                 overflow-hidden
-              `}
+              `)}
             >
               <Trophy className={`w-8 h-8 ${isAnimating ? 'animate-bounce' : ''}`} />
               <span className={`relative ${isAnimating ? 'animate-pulse' : ''}`}>
